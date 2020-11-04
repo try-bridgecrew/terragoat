@@ -88,5 +88,6 @@ resource "aws_s3_bucket" "logs" {
 }
 
 resource aws_s3_bucket "another-bad-bucket" {
+  # bridgecrew:skip=BC_AWS_GENERAL_26:Managed via terraform
   bucket = "new-bad-bucket"
 }
