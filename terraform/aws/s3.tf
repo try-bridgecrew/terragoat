@@ -96,4 +96,8 @@ resource "aws_s3_bucket" "demo" {
     Name        = "${local.resource_prefix.value}-demo"
     Environment = local.resource_prefix.value
   }
+  logging {
+    target_bucket = "${aws_s3_bucket.logs.id}"
+    target_prefix = "demo/"
+  }
 }
