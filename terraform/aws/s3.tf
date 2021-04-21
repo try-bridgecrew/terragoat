@@ -123,6 +123,10 @@ resource "aws_s3_bucket" "demo2" {
   versioning {
     enabled = true
   }
+  logging {
+    target_bucket = "${aws_s3_bucket.logs.id}"
+    target_prefix = "demo2/"
+  }
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
