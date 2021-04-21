@@ -89,3 +89,58 @@ resource "aws_s3_bucket" "logs" {
     Environment = local.resource_prefix.value
   }
 }
+
+resource "aws_s3_bucket" "demo1" {
+  #no bucket versioning
+  bucket = "${local.resource_prefix.value}-demo1"
+  tags = {
+    Name        = "${local.resource_prefix.value}-demo1"
+    Environment = local.resource_prefix.value
+  }
+  logging {
+    target_bucket = "${aws_s3_bucket.logs.id}"
+    target_prefix = "demo1/"
+  }
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+}
+
+resource "aws_s3_bucket" "demo2" {
+  #no bucket access logging
+  bucket = "${local.resource_prefix.value}-demo2"
+  tags = {
+    Name        = "${local.resource_prefix.value}-demo2"
+    Environment = local.resource_prefix.value
+  }
+  versioning {
+    enabled = true
+  }
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+}
+
+resource "aws_s3_bucket" "demo3" {
+  #no SSE 
+  bucket = "${local.resource_prefix.value}-demo3"
+  tags = {
+    Name        = "${local.resource_prefix.value}-demo3"
+    Environment = local.resource_prefix.value
+  }
+  versioning {
+    enabled = true
+  }
+  logging {
+    target_bucket = "${aws_s3_bucket.logs.id}"
+    target_prefix = "demo3/"
+  }
+}
