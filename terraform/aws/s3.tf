@@ -108,6 +108,9 @@ resource "aws_s3_bucket" "demo1" {
       }
     }
   }
+  versioning {
+    enabled = true
+  }
 }
 
 resource "aws_s3_bucket" "demo2" {
@@ -142,5 +145,12 @@ resource "aws_s3_bucket" "demo3" {
   logging {
     target_bucket = "${aws_s3_bucket.logs.id}"
     target_prefix = "demo3/"
+  }
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
   }
 }
