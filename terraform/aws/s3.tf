@@ -139,3 +139,4 @@ resource "aws_s3_bucket" "logs" {
     yor_trace            = "ce72f84f-4cb6-4f67-b540-54d7e998df19"
   }
 }
+
