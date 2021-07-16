@@ -61,6 +61,13 @@ resource "aws_s3_bucket" "financials" {
     yor_trace            = "cecbef60-a2ea-4710-9d45-b865340e6095"
   }
 
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
 }
 
 resource "aws_s3_bucket" "operations" {
@@ -108,6 +115,13 @@ resource "aws_s3_bucket" "data_science" {
     git_org              = "try-bridgecrew"
     git_repo             = "terragoat"
     yor_trace            = "25565a41-2c9e-45f2-a9e9-6c15b7afcfb6"
+  }
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
   }
 }
 
